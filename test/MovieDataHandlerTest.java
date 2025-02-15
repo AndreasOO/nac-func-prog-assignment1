@@ -57,66 +57,66 @@ class MovieDataHandlerTest {
 
     @Test
     void findRuntimeOfLongestMovie() {
-        assertEquals(220, movieDataHandlerPositiveTestFlow.findRuntimeOfLongestMovie(movieListPositiveTestFlow));
-        assertEquals(0, movieDataHandlerEmptyListTestFlow.findRuntimeOfLongestMovie(emptyMovieList));
-        assertEquals(220, movieDataHandlerEdgeCaseTestFlow.findRuntimeOfLongestMovie(movieListEdgeCaseTestFlow));
+        assertEquals(220, movieDataHandlerPositiveTestFlow.findRuntimeOfLongestMovie());
+        assertEquals(0, movieDataHandlerEmptyListTestFlow.findRuntimeOfLongestMovie());
+        assertEquals(220, movieDataHandlerEdgeCaseTestFlow.findRuntimeOfLongestMovie());
 
     }
 
     @Test
     void findNumberOfUniqueGenresByYear() {
-        assertEquals(2, movieDataHandlerPositiveTestFlow.findNumberOfUniqueGenresByYear(movieListPositiveTestFlow, 1975));
-        assertEquals(0, movieDataHandlerEmptyListTestFlow.findNumberOfUniqueGenresByYear(emptyMovieList, 1975));
-        assertEquals(3, movieDataHandlerEdgeCaseTestFlow.findNumberOfUniqueGenresByYear(movieListEdgeCaseTestFlow, 1975));
+        assertEquals(2, movieDataHandlerPositiveTestFlow.findNumberOfUniqueGenresByYear(1975));
+        assertEquals(0, movieDataHandlerEmptyListTestFlow.findNumberOfUniqueGenresByYear(1975));
+        assertEquals(3, movieDataHandlerEdgeCaseTestFlow.findNumberOfUniqueGenresByYear(1975));
 
     }
 
     @Test
     void findActorsByHighestRatedMovie() {
-        assertEquals(List.of("Single Actor in most movies", "What"), movieDataHandlerPositiveTestFlow.findActorsByHighestRatedMovie(movieListPositiveTestFlow));
-        assertEquals(List.of(), movieDataHandlerEmptyListTestFlow.findActorsByHighestRatedMovie(emptyMovieList));
-        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), movieDataHandlerEdgeCaseTestFlow.findActorsByHighestRatedMovie(movieListEdgeCaseTestFlow));
+        assertEquals(List.of("Single Actor in most movies", "What"), movieDataHandlerPositiveTestFlow.findActorsByHighestRatedMovie());
+        assertEquals(List.of(), movieDataHandlerEmptyListTestFlow.findActorsByHighestRatedMovie());
+        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), movieDataHandlerEdgeCaseTestFlow.findActorsByHighestRatedMovie());
 
     }
 
     @Test
     void findMovieWithLeastNumberOfActors() {
-        assertEquals("Movie Title With Least Actors", movieDataHandlerPositiveTestFlow.findMovieTitleWithLeastNumberOfActors(movieListPositiveTestFlow));
+        assertEquals("Movie Title With Least Actors", movieDataHandlerPositiveTestFlow.findMovieTitleWithLeastNumberOfActors());
 
         //replace with NoSuchElementException that comes with Optional.elseThrow()?
-        assertThrows(NoSuchElementException.class, () -> movieDataHandlerEmptyListTestFlow.findMovieTitleWithLeastNumberOfActors(emptyMovieList));
-        assertEquals("Movie 1 Title With Least Actors, shared place with movie: Movie 2 Title With Least Actors", movieDataHandlerEdgeCaseTestFlow.findMovieTitleWithLeastNumberOfActors(movieListEdgeCaseTestFlow));
+        assertThrows(NoSuchElementException.class, () -> movieDataHandlerEmptyListTestFlow.findMovieTitleWithLeastNumberOfActors());
+        assertEquals("Movie 1 Title With Least Actors, shared place with movie: Movie 2 Title With Least Actors", movieDataHandlerEdgeCaseTestFlow.findMovieTitleWithLeastNumberOfActors());
     }
 
     @Test
     void findNumberOfActorsStarringInTwoOrMoreMovies() {
-        assertEquals(2, movieDataHandlerPositiveTestFlow.findNumberOfActorsStarringInTwoOrMoreMovies(movieListPositiveTestFlow));
-        assertEquals(0, movieDataHandlerEmptyListTestFlow.findNumberOfActorsStarringInTwoOrMoreMovies(emptyMovieList));
+        assertEquals(2, movieDataHandlerPositiveTestFlow.findNumberOfActorsStarringInTwoOrMoreMovies());
+        assertEquals(0, movieDataHandlerEmptyListTestFlow.findNumberOfActorsStarringInTwoOrMoreMovies());
     }
 
     @Test
     void findActorsFoundInMostMovies() {
-        assertEquals("Single Actor in most movies", movieDataHandlerPositiveTestFlow.findActorsFoundInMostMovies(movieListPositiveTestFlow));
+        assertEquals("Single Actor in most movies", movieDataHandlerPositiveTestFlow.findActorsFoundInMostMovies());
 
         //replace with NoSuchElementException that comes with Optional.elseThrow()?
-        assertThrows(NoSuchElementException.class, () ->  movieDataHandlerEmptyListTestFlow.findActorsFoundInMostMovies(emptyMovieList));
-//        assertNull(movieDataHandlerEmptyListTestFlow.findActorsFoundInMostMovies(emptyMovieList));
+        assertThrows(NoSuchElementException.class, () ->  movieDataHandlerEmptyListTestFlow.findActorsFoundInMostMovies());
+//        assertNull(movieDataHandlerEmptyListTestFlow.findActorsFoundInMostMovies());
 
         // add duplicate with the joining...
-        assertEquals("Actor 1 in most movies, shared place with actor: Actor 2 in most movies", movieDataHandlerEdgeCaseTestFlow.findActorsFoundInMostMovies(movieListEdgeCaseTestFlow));
+        assertEquals("Actor 1 in most movies, shared place with actor: Actor 2 in most movies", movieDataHandlerEdgeCaseTestFlow.findActorsFoundInMostMovies());
     }
 
     @Test
     void findNumberOfUniqueLanguagesInMovies() {
-        assertEquals(2, movieDataHandlerPositiveTestFlow.findNumberOfUniqueLanguagesInMovies(movieListPositiveTestFlow));
-        assertEquals(0, movieDataHandlerEmptyListTestFlow.findNumberOfUniqueLanguagesInMovies(emptyMovieList));
-        assertEquals(3, movieDataHandlerEdgeCaseTestFlow.findNumberOfUniqueLanguagesInMovies(movieListEdgeCaseTestFlow));
+        assertEquals(2, movieDataHandlerPositiveTestFlow.findNumberOfUniqueLanguagesInMovies());
+        assertEquals(0, movieDataHandlerEmptyListTestFlow.findNumberOfUniqueLanguagesInMovies());
+        assertEquals(3, movieDataHandlerEdgeCaseTestFlow.findNumberOfUniqueLanguagesInMovies());
     }
 
     @Test
     void moviesHaveDuplicatesOfTitles() {
-        assertTrue(movieDataHandlerPositiveTestFlow.moviesHaveDuplicatesOfTitles(movieListPositiveTestFlow));
-        assertFalse(movieDataHandlerEmptyListTestFlow.moviesHaveDuplicatesOfTitles(emptyMovieList));
-        assertFalse(movieDataHandlerEdgeCaseTestFlow.moviesHaveDuplicatesOfTitles(movieListEdgeCaseTestFlow));
+        assertTrue(movieDataHandlerPositiveTestFlow.moviesHaveDuplicatesOfTitles());
+        assertFalse(movieDataHandlerEmptyListTestFlow.moviesHaveDuplicatesOfTitles());
+        assertFalse(movieDataHandlerEdgeCaseTestFlow.moviesHaveDuplicatesOfTitles());
     }
 }
