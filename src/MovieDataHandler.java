@@ -41,6 +41,7 @@ public class MovieDataHandler {
         return movieList.stream().filter(filterByUniqueId)
                                  .filter(movie1-> movie1.getYear() == year)
                                  .map(Movie::getGenres)
+                                 .flatMap(List::stream)
                                  .distinct()
                                  .count();
     }
