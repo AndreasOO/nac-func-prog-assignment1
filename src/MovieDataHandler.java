@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -79,7 +78,7 @@ public class MovieDataHandler {
     }
 
     // HORRIBLE FIX IT
-    public String findActorsFoundInMostMovies() {
+    public String findActorFoundInMostMovies() {
         Map<String,Long> mapOfActorsCountedInMovies = movieList.stream().filter(filterByUniqueId)
                                                                         .map(Movie::getCast)
                                                                         .flatMap(List::stream)

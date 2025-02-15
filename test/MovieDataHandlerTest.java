@@ -96,14 +96,14 @@ class MovieDataHandlerTest {
 
     @Test
     void findActorsFoundInMostMovies() {
-        assertEquals("Single Actor in most movies", movieDataHandlerPositiveTestFlow.findActorsFoundInMostMovies());
+        assertEquals("Single Actor in most movies", movieDataHandlerPositiveTestFlow.findActorFoundInMostMovies());
 
         //replace with NoSuchElementException that comes with Optional.elseThrow()?
-        assertThrows(NoSuchElementException.class, () ->  movieDataHandlerEmptyListTestFlow.findActorsFoundInMostMovies());
+        assertThrows(NoSuchElementException.class, () ->  movieDataHandlerEmptyListTestFlow.findActorFoundInMostMovies());
 //        assertNull(movieDataHandlerEmptyListTestFlow.findActorsFoundInMostMovies());
 
         // add duplicate with the joining...
-        assertEquals("Actor 1 in most movies, shared place with actor: Actor 2 in most movies", movieDataHandlerEdgeCaseTestFlow.findActorsFoundInMostMovies());
+        assertEquals("Actor 1 in most movies, shared place with actor: Actor 2 in most movies", movieDataHandlerEdgeCaseTestFlow.findActorFoundInMostMovies());
     }
 
     @Test
