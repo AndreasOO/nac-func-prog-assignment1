@@ -1,10 +1,14 @@
 import java.util.List;
 
 public class MovieDataHandler {
+
+    // insert static final Predicate function variables here
+
     public MovieDataHandler() {
     }
 
 
+    // filter out duplicate ids
     public int findNumberOfMoviesByYear(List<Movie> movieList, int year) {
         return -1;
     }
