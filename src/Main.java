@@ -31,7 +31,6 @@ public class Main {
 
             MovieDataHandler movieDataHandler = new MovieDataHandler(movieList);
 
-
             System.out.println(movieDataHandler.findNumberOfMoviesByYear(1975));
             System.out.println(movieDataHandler.findRuntimeOfLongestMovie());
             System.out.println(movieDataHandler.findNumberOfUniqueGenresByYear(1975));
