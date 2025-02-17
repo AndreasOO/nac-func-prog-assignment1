@@ -36,7 +36,7 @@ public class Main {
             System.out.println(movieDataHandler.findNumberOfUniqueGenresByYear(1975));
             System.out.println(movieDataHandler.findActorsByHighestRatedMovie());
             System.out.println(movieDataHandler.findMovieTitleWithLeastNumberOfActors());
-            System.out.println(movieDataHandler.findNumberOfActorsStarringInTwoOrMoreMovies());
+            System.out.println(movieDataHandler.findNumberOfActorsStarringInMultipleMovies());
             System.out.println(movieDataHandler.findActorFoundInMostMovies());
             System.out.println(movieDataHandler.findNumberOfUniqueLanguagesInMovies());
             System.out.println(movieDataHandler.moviesHaveDuplicatesOfTitles());

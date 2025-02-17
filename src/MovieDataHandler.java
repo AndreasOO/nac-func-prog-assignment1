@@ -1,12 +1,14 @@
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public class MovieDataHandler {
     private final List<Movie> movieList;
     private final Predicate<Movie> filterByUniqueId;
+    private final Function<List<Movie>, Optional<Map<String,Long>>> mapActorsToMovieAppearance;
 
 
 
@@ -14,6 +16,12 @@ public class MovieDataHandler {
         this.movieList = movieList;
         filterByUniqueId = movie1 -> movieList.stream().filter(movie2 -> movie1.getId().equals(movie2.getId()))
                                                              .count() == 1;
+
+        mapActorsToMovieAppearance = list -> list.isEmpty() ? Optional.empty() : Optional.of(list.stream()
+                                                                                                            .filter(filterByUniqueId)
+                                                                                                            .map(Movie::getCast)
+                                                                                                            .flatMap(List::stream)
+                                                                                                            .collect(Collectors.groupingBy(actor -> actor, Collectors.counting())));
     }
 
 
@@ -67,32 +75,29 @@ public class MovieDataHandler {
                                  .collect(Collectors.joining(", shared place with movie: "));
     }
 
-    public long findNumberOfActorsStarringInTwoOrMoreMovies() {
-        return movieList.stream().filter(filterByUniqueId)
-                                 .map(Movie::getCast)
-                                 .flatMap(List::stream)
-                                 .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))
-                                 .values()
-                                 .stream()
-                                 .filter(starring -> starring > 1)
-                                 .count();
+    public long findNumberOfActorsStarringInMultipleMovies() {
+        return mapActorsToMovieAppearance.apply(movieList)
+                                         .orElseThrow()
+                                         .values()
+                                         .stream()
+                                         .filter(starring -> starring > 1)
+                                         .count();
     }
 
     // HORRIBLE FIX IT
     public String findActorFoundInMostMovies() {
-        Map<String,Long> mapOfActorsCountedInMovies = movieList.stream().filter(filterByUniqueId)
-                                                                        .map(Movie::getCast)
-                                                                        .flatMap(List::stream)
-                                                                        .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()));
 
-        long max = mapOfActorsCountedInMovies.values().stream().mapToLong(x -> x)
-                                                               .max()
-                                                               .orElseThrow();
-
-        return mapOfActorsCountedInMovies.entrySet().stream()
-                                                    .filter(entry -> entry.getValue() == max)
-                                                    .map(Map.Entry::getKey)
-                                                    .collect(Collectors.joining(", shared place with actor: "));
+        return mapActorsToMovieAppearance.apply(movieList)
+                                         .orElseThrow()
+                                         .entrySet()
+                                         .stream().filter(entry -> entry.getValue() == mapActorsToMovieAppearance.apply(movieList)
+                                                                                                                                 .orElseThrow()
+                                                                                                                                 .values()
+                                                                                                                                 .stream().mapToLong(Long::longValue)
+                                                                                                                                          .max()
+                                                                                                                                          .orElseThrow())
+                                                  .map(Map.Entry::getKey)
+                                                  .collect(Collectors.joining(", shared place with actor: "));
     }
 
     public long findNumberOfUniqueLanguagesInMovies() {
