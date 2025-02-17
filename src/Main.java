@@ -4,6 +4,7 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 public class Main {
@@ -31,11 +32,12 @@ public class Main {
 
             MovieDataHandler movieDataHandler = new MovieDataHandler();
 
-            System.out.println(movieDataHandler.findNumberOfMoviesByYear(movieList,1975));
+
+            System.out.println(movieDataHandler.findNumberOfMoviesByYear(movieList, 1975));
 
             System.out.println(movieDataHandler.findRuntimeOfLongestMovie(movieList));
 
-            System.out.println(movieDataHandler.findNumberOfUniqueAttributesByYear(movieList,1975, Extractor.UNIQUE_GENRES.extractFunc));
+            System.out.println(movieDataHandler.findNumberOfUniqueAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.extractFunc));
 
             System.out.println(movieDataHandler.findAttributesByHighestRatedMovie(movieList, Extractor.UNIQUE_ACTORS.extractFunc));
 
@@ -50,7 +52,8 @@ public class Main {
             System.out.println(movieDataHandler.moviesHaveDuplicatesOfTitles(movieList));
 
 
-
+        } catch (NoSuchElementException e) {
+            System.out.println("Empty movie list");
         } catch (Exception e) {
             e.printStackTrace();
         }

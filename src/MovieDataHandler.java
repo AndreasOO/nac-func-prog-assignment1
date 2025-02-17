@@ -42,8 +42,7 @@ public class MovieDataHandler {
 
 
     public String findMovieTitleWithLeastNumberOfActors(List<Movie> movieList) {
-        return movieList.stream().filter(movie -> movie.getCast().size() == movieList.stream()
-                                                                                                   .mapToInt(movie2 -> movie2.getCast().size())
+        return movieList.stream().filter(movie -> movie.getCast().size() == movieList.stream().mapToInt(movie2 -> movie2.getCast().size())
                                                                                                    .min()
                                                                                                    .orElseThrow())
                                                               .map(Movie::getTitle)

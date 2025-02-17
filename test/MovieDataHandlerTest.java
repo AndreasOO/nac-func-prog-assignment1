@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MovieDataHandlerTest {
@@ -82,7 +81,7 @@ class MovieDataHandlerTest {
         assertEquals("Movie Title With Least Actors", dataHandler.findMovieTitleWithLeastNumberOfActors(movieListPositiveTestFlow));
         //TODO FIGURE OUT EMPTY LIST ISSUE
         //replace with NoSuchElementException that comes with Optional.elseThrow()?
-//        assertThrows(NoSuchElementException.class, () -> dataHandler.findMovieTitleWithLeastNumberOfActors());
+        assertEquals("", dataHandler.findMovieTitleWithLeastNumberOfActors(emptyMovieList));
         assertEquals("Movie 1 Title With Least Actors, shared place with: Movie 2 Title With Least Actors, shared place with: Movie 3 Title With Least Actors", dataHandler.findMovieTitleWithLeastNumberOfActors(movieListEdgeCaseTestFlow));
     }
 
