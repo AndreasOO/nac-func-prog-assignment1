@@ -2,81 +2,56 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MovieDataHandler {
-    private final List<Movie> movieList;
-    private final Predicate<Movie> filterByUniqueId;
-    private final Function<List<Movie>, Optional<Map<String,Long>>> mapActorsToMovieAppearance;
 
 
+    public MovieDataHandler() {
 
-    public MovieDataHandler(List<Movie> movieList) {
-        this.movieList = movieList;
-        filterByUniqueId = movie1 -> movieList.stream().filter(movie2 -> movie1.getId().equals(movie2.getId()))
-                                                             .count() == 1;
-
-        mapActorsToMovieAppearance = list -> list.isEmpty() ? Optional.empty() : Optional.of(list.stream()
-                                                                                                            .filter(filterByUniqueId)
-                                                                                                            .map(Movie::getCast)
-                                                                                                            .flatMap(List::stream)
-                                                                                                            .collect(Collectors.groupingBy(actor -> actor, Collectors.counting())));
     }
 
 
     // filter out duplicate ids
-    public long findNumberOfMoviesByYear(int year) {
-        return movieList.stream().filter(filterByUniqueId)
-                                 .filter(movie1-> movie1.getYear() == year)
-                                 .count();
+    public long findNumberOfMoviesByYear(List<Movie> movieList, int year) {
+        return movieList.stream().filter(movie1-> movie1.getYear() == year)
+                                                              .count();
     }
 
-    public int findRuntimeOfLongestMovie() {
-        return movieList.stream().filter(filterByUniqueId)
-                                 .mapToInt(Movie::getRuntime)
-                                 .max()
-                                 .orElse(0);
+    public int findRuntimeOfLongestMovie(List<Movie> movieList) {
+        return movieList.stream().mapToInt(Movie::getRuntime)
+                                                              .max()
+                                                              .orElse(0);
     }
 
-    public long findNumberOfUniqueGenresByYear(int year) {
-        return movieList.stream().filter(filterByUniqueId)
-                                 .filter(movie1-> movie1.getYear() == year)
-                                 .map(Movie::getGenres)
-                                 .flatMap(List::stream)
-                                 .distinct()
-                                 .count();
+    public long findNumberOfUniqueAttributesByYear(List<Movie> movieList, int year, Function<Stream<Movie>, Stream<String>> extractor) {
+        return extractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year)).count();
     }
 
 
-    public List<String> findActorsByHighestRatedMovie() {
+    public List<String> findAttributesByHighestRatedMovie(List<Movie> movieList, Function<Stream<Movie>, Stream<String>> extractor) {
         double highestRating = movieList.stream().mapToDouble(Movie::getImdbRating)
                                                  .max()
                                                  .orElse(0.0);
 
-        return movieList.stream().filter(filterByUniqueId)
-                                 .filter(movie -> movie.getImdbRating() == highestRating)
-                                 .map(Movie::getCast)
-                                 .flatMap(List::stream)
-                                 .distinct()
-                                 .toList();
+        return extractor.apply(movieList.stream()
+                                                  .filter(movie -> movie.getImdbRating() == highestRating))
+                                  .toList();
     }
 
 
-    public String findMovieTitleWithLeastNumberOfActors() {
-        int leastNumberOfActors = movieList.stream().filter(filterByUniqueId)
-                                                    .mapToInt(movie -> movie.getCast().size())
-                                                    .min()
-                                                    .orElseThrow();
-
-        return movieList.stream().filter(filterByUniqueId)
-                                 .filter(movie -> movie.getCast().size() == leastNumberOfActors)
-                                 .map(Movie::getTitle)
-                                 .collect(Collectors.joining(", shared place with movie: "));
+    public String findMovieTitleWithLeastNumberOfActors(List<Movie> movieList) {
+        return movieList.stream().filter(movie -> movie.getCast().size() == movieList.stream()
+                                                                                                   .mapToInt(movie2 -> movie2.getCast().size())
+                                                                                                   .min()
+                                                                                                   .orElseThrow())
+                                                              .map(Movie::getTitle)
+                                                              .collect(Collectors.joining(", shared place with: "));
     }
 
-    public long findNumberOfActorsStarringInMultipleMovies() {
-        return mapActorsToMovieAppearance.apply(movieList)
+    public long findNumberOfAttributesPresentInMultipleMovies(List<Movie> movieList, Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
+        return mapper.apply(movieList)
                                          .orElseThrow()
                                          .values()
                                          .stream()
@@ -84,38 +59,33 @@ public class MovieDataHandler {
                                          .count();
     }
 
-    // HORRIBLE FIX IT
-    public String findActorFoundInMostMovies() {
 
-        return mapActorsToMovieAppearance.apply(movieList)
+    public String findAttributeFoundInMostMovies(List<Movie> movieList, Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
+        return mapper.apply(movieList)
                                          .orElseThrow()
                                          .entrySet()
-                                         .stream().filter(entry -> entry.getValue() == mapActorsToMovieAppearance.apply(movieList)
+                                         .stream().filter(entry -> entry.getValue() == mapper.apply(movieList)
                                                                                                                                  .orElseThrow()
                                                                                                                                  .values()
                                                                                                                                  .stream().mapToLong(Long::longValue)
                                                                                                                                           .max()
                                                                                                                                           .orElseThrow())
                                                   .map(Map.Entry::getKey)
-                                                  .collect(Collectors.joining(", shared place with actor: "));
+                                                  .collect(Collectors.joining(", shared place with: "));
     }
 
-    public long findNumberOfUniqueLanguagesInMovies() {
-        return movieList.stream().filter(filterByUniqueId)
-                                 .map(Movie::getLanguages)
-                                 .flatMap(List::stream)
-                                 .distinct()
-                                 .count();
+
+    public long findNumberOfUniqueAttributesInMovies(List<Movie> movieList, Function<Stream<Movie>, Stream<String>> extractor) {
+        return extractor.apply(movieList.stream()).count();
     }
 
-    // contestant for higher level function
-    public boolean moviesHaveDuplicatesOfTitles() {
-        return movieList.stream().filter(filterByUniqueId)
-                                 .map(Movie::getTitle)
-                                 .distinct()
-                                 .count() < movieList.stream()
-                                 .filter(filterByUniqueId)
-                                 .count();
+
+
+    public boolean moviesHaveDuplicatesOfTitles(List<Movie> movieList) {
+        return movieList.stream().map(Movie::getTitle)
+                                                              .distinct()
+                                                              .count() < (long) movieList.size();
+
     }
 
 

@@ -29,17 +29,17 @@ public class Main {
                 System.out.println(movie);
             }
 
-            MovieDataHandler movieDataHandler = new MovieDataHandler(movieList);
+            MovieDataHandler movieDataHandler = new MovieDataHandler();
 
-            System.out.println(movieDataHandler.findNumberOfMoviesByYear(1975));
-            System.out.println(movieDataHandler.findRuntimeOfLongestMovie());
-            System.out.println(movieDataHandler.findNumberOfUniqueGenresByYear(1975));
-            System.out.println(movieDataHandler.findActorsByHighestRatedMovie());
-            System.out.println(movieDataHandler.findMovieTitleWithLeastNumberOfActors());
-            System.out.println(movieDataHandler.findNumberOfActorsStarringInMultipleMovies());
-            System.out.println(movieDataHandler.findActorFoundInMostMovies());
-            System.out.println(movieDataHandler.findNumberOfUniqueLanguagesInMovies());
-            System.out.println(movieDataHandler.moviesHaveDuplicatesOfTitles());
+            System.out.println(movieDataHandler.findNumberOfMoviesByYear(movieList,1975));
+            System.out.println(movieDataHandler.findRuntimeOfLongestMovie(movieList));
+            System.out.println(movieDataHandler.findNumberOfUniqueAttributesByYear(movieList,1975, Extractor.UNIQUE_GENRES.extractFunc));
+            System.out.println(movieDataHandler.findAttributesByHighestRatedMovie(movieList, Extractor.UNIQUE_ACTORS.extractFunc));
+            System.out.println(movieDataHandler.findMovieTitleWithLeastNumberOfActors(movieList));
+            System.out.println(movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.mapFunc));
+            System.out.println(movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.mapFunc));
+            System.out.println(movieDataHandler.findNumberOfUniqueAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.extractFunc));
+            System.out.println(movieDataHandler.moviesHaveDuplicatesOfTitles(movieList));
 
 
 
