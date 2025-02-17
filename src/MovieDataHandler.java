@@ -21,13 +21,19 @@ public class MovieDataHandler {
         return reducer.apply(movieList);
     }
 
-    public long findNumberOfUniqueAttributesByYear(List<Movie> movieList, int year, Function<Stream<Movie>, Stream<String>> extractor) {
+    public long findNumberOfUniqueAttributesByYear(List<Movie> movieList,
+                                                   int year,
+                                                   Function<Stream<Movie>, Stream<String>> extractor) {
+
         return extractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year))
                         .count();
     }
 
 
-    public List<String> findAttributesByRating(List<Movie> movieList, Function<Stream<Movie>, Stream<String>> extractor, Function<List<Movie>, Double> reducer) {
+    public List<String> findAttributesByRating(List<Movie> movieList,
+                                               Function<Stream<Movie>, Stream<String>> extractor,
+                                               Function<List<Movie>, Double> reducer) {
+
         return extractor.apply(movieList.stream().filter(movie -> movie.getImdbRating() == reducer.apply(movieList)))
                         .toList();
     }
@@ -41,7 +47,8 @@ public class MovieDataHandler {
                         .collect(Collectors.joining(", shared place with: "));
     }
 
-    public long findNumberOfAttributesPresentInMultipleMovies(List<Movie> movieList, Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
+    public long findNumberOfAttributesPresentInMultipleMovies(List<Movie> movieList,
+                                                              Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
         return mapper.apply(movieList).orElseThrow()
                                       .values()
                                       .stream()
@@ -50,14 +57,18 @@ public class MovieDataHandler {
     }
 
 
-    public String findAttributeFoundInMostMovies(List<Movie> movieList, Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
+    public String findAttributeFoundInMostMovies(List<Movie> movieList,
+                                                 Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
+
+        long max = mapper.apply(movieList).orElseThrow()
+                                            .values()
+                                            .stream().mapToLong(Long::longValue)
+                                                     .max()
+                                                     .orElseThrow();
+
         return mapper.apply(movieList).orElseThrow()
                                       .entrySet()
-                                      .stream().filter(entry -> entry.getValue() == mapper.apply(movieList).orElseThrow()
-                                                                                                                            .values()
-                                                                                                                            .stream().mapToLong(Long::longValue)
-                                                                                                                                     .max()
-                                                                                                                                     .orElseThrow())
+                                      .stream().filter(entry -> entry.getValue() == max)
                                                .map(Map.Entry::getKey)
                                                .collect(Collectors.joining(", shared place with: "));
     }
