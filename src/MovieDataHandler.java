@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class MovieDataHandler {
     private final List<Movie> movieList;
@@ -71,9 +72,9 @@ public class MovieDataHandler {
                                  .map(Movie::getCast)
                                  .flatMap(List::stream)
                                  .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))
-                                 .entrySet()
+                                 .values()
                                  .stream()
-                                 .filter(entry -> entry.getValue() > 1)
+                                 .filter(starring -> starring > 1)
                                  .count();
     }
 
@@ -84,10 +85,9 @@ public class MovieDataHandler {
                                                                         .flatMap(List::stream)
                                                                         .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()));
 
-        long max = mapOfActorsCountedInMovies.entrySet().stream()
-                                                        .max(Map.Entry.comparingByValue())
-                                                        .orElseThrow()
-                                                        .getValue();
+        long max = mapOfActorsCountedInMovies.values().stream().mapToLong(x -> x)
+                                                               .max()
+                                                               .orElseThrow();
 
         return mapOfActorsCountedInMovies.entrySet().stream()
                                                     .filter(entry -> entry.getValue() == max)
