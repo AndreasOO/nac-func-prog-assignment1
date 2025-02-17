@@ -13,11 +13,15 @@ public enum Extractor {
 
     UNIQUE_ACTORS(stream -> stream.map(Movie::getCast)
                                                .flatMap(List::stream)
-                                               .distinct());
+                                               .distinct()),
 
-    final Function<Stream<Movie>, Stream<String>> extractFunc;
+    UNIQUE_TITLES(stream -> stream.map(Movie::getTitle).distinct()),
 
-    Extractor(Function<Stream<Movie>, Stream<String>> extractFunc) {
-        this.extractFunc = extractFunc;
+    ALL_TITLES(stream -> stream.map(Movie::getTitle));
+
+    final Function<Stream<Movie>, Stream<String>> func;
+
+    Extractor(Function<Stream<Movie>, Stream<String>> func) {
+        this.func = func;
     }
 }

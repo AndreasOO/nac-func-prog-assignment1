@@ -10,9 +10,9 @@ public enum Mapper {
             .flatMap(List::stream)
             .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))));
 
-    final Function<List<Movie>, Optional<Map<String,Long>>> mapFunc;
+    final Function<List<Movie>, Optional<Map<String,Long>>> func;
 
-    Mapper(Function<List<Movie>, Optional<Map<String,Long>>> mapFunc) {
-        this.mapFunc = mapFunc;
+    Mapper(Function<List<Movie>, Optional<Map<String,Long>>> func) {
+        this.func = func;
     }
 }

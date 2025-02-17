@@ -25,31 +25,34 @@ public class Main {
                 }
             }
 
-            // Skriver ut alla filmer
-            for (Movie movie : movieList) {
-                System.out.println(movie);
-            }
-
             MovieDataHandler movieDataHandler = new MovieDataHandler();
 
+            long resultQ1 = movieDataHandler.findNumberOfMoviesByYear(movieList, 1975);
+            System.out.println(resultQ1);
 
-            System.out.println(movieDataHandler.findNumberOfMoviesByYear(movieList, 1975));
+            int resultQ2 = movieDataHandler.findRuntimeStatistics(movieList, IntReducer.MAX_RUNTIME.func);
+            System.out.println(resultQ2);
 
-            System.out.println(movieDataHandler.findRuntimeOfLongestMovie(movieList));
+            long resultQ3 = movieDataHandler.findNumberOfUniqueAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.func);
+            System.out.println(resultQ3);
 
-            System.out.println(movieDataHandler.findNumberOfUniqueAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.extractFunc));
+            List<String> resultQ4 = movieDataHandler.findAttributesByRating(movieList, Extractor.UNIQUE_ACTORS.func, DoubleReducer.MAX_RATING.func);
+            System.out.println(resultQ4);
 
-            System.out.println(movieDataHandler.findAttributesByHighestRatedMovie(movieList, Extractor.UNIQUE_ACTORS.extractFunc));
+            String resultQ5 = movieDataHandler.findAttributeByNumberOfActors(movieList, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func);
+            System.out.println(resultQ5);
 
-            System.out.println(movieDataHandler.findMovieTitleWithLeastNumberOfActors(movieList));
+            long resultQ6 = movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
+            System.out.println(resultQ6);
 
-            System.out.println(movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.mapFunc));
+            String resultQ7 = movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
+            System.out.println(resultQ7);
 
-            System.out.println(movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.mapFunc));
+            long resultQ8 = movieDataHandler.findNumberOfUniqueAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.func);
+            System.out.println(resultQ8);
 
-            System.out.println(movieDataHandler.findNumberOfUniqueAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.extractFunc));
-
-            System.out.println(movieDataHandler.moviesHaveDuplicatesOfTitles(movieList));
+            boolean resultQ9 = movieDataHandler.moviesHaveDuplicatesOfAttributes(movieList, Extractor.UNIQUE_TITLES.func, Extractor.ALL_TITLES.func);
+            System.out.println(resultQ9);
 
 
         } catch (NoSuchElementException e) {

@@ -12,17 +12,13 @@ public class MovieDataHandler {
 
     }
 
-
-    // filter out duplicate ids
     public long findNumberOfMoviesByYear(List<Movie> movieList, int year) {
         return movieList.stream().filter(movie1-> movie1.getYear() == year)
                                                               .count();
     }
 
-    public int findRuntimeOfLongestMovie(List<Movie> movieList) {
-        return movieList.stream().mapToInt(Movie::getRuntime)
-                                                              .max()
-                                                              .orElse(0);
+    public int findRuntimeStatistics(List<Movie> movieList, Function<List<Movie>, Integer> reducer) {
+        return reducer.apply(movieList);
     }
 
     public long findNumberOfUniqueAttributesByYear(List<Movie> movieList, int year, Function<Stream<Movie>, Stream<String>> extractor) {
@@ -31,46 +27,39 @@ public class MovieDataHandler {
     }
 
 
-    public List<String> findAttributesByHighestRatedMovie(List<Movie> movieList, Function<Stream<Movie>, Stream<String>> extractor) {
-        double highestRating = movieList.stream().mapToDouble(Movie::getImdbRating)
-                                                 .max()
-                                                 .orElse(0.0);
-
-        return extractor.apply(movieList.stream().filter(movie -> movie.getImdbRating() == highestRating))
+    public List<String> findAttributesByRating(List<Movie> movieList, Function<Stream<Movie>, Stream<String>> extractor, Function<List<Movie>, Double> reducer) {
+        return extractor.apply(movieList.stream().filter(movie -> movie.getImdbRating() == reducer.apply(movieList)))
                         .toList();
     }
 
 
-    public String findMovieTitleWithLeastNumberOfActors(List<Movie> movieList) {
-        return movieList.stream().filter(movie -> movie.getCast().size() == movieList.stream().mapToInt(movie2 -> movie2.getCast().size())
-                                                                                                   .min()
-                                                                                                   .orElseThrow())
-                                                              .map(Movie::getTitle)
-                                                              .collect(Collectors.joining(", shared place with: "));
+    public String findAttributeByNumberOfActors(List<Movie> movieList,
+                                                Function<Stream<Movie>, Stream<String>> extractor,
+                                                Function<List<Movie>, Integer> reducer) {
+
+        return extractor.apply(movieList.stream().filter(movie -> movie.getCast().size() == reducer.apply(movieList)))
+                        .collect(Collectors.joining(", shared place with: "));
     }
 
     public long findNumberOfAttributesPresentInMultipleMovies(List<Movie> movieList, Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
-        return mapper.apply(movieList)
-                                         .orElseThrow()
-                                         .values()
-                                         .stream()
-                                         .filter(starring -> starring > 1)
-                                         .count();
+        return mapper.apply(movieList).orElseThrow()
+                                      .values()
+                                      .stream()
+                                      .filter(count -> count > 1)
+                                      .count();
     }
 
 
     public String findAttributeFoundInMostMovies(List<Movie> movieList, Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
-        return mapper.apply(movieList)
-                                         .orElseThrow()
-                                         .entrySet()
-                                         .stream().filter(entry -> entry.getValue() == mapper.apply(movieList)
-                                                                                                                                 .orElseThrow()
-                                                                                                                                 .values()
-                                                                                                                                 .stream().mapToLong(Long::longValue)
-                                                                                                                                          .max()
-                                                                                                                                          .orElseThrow())
-                                                  .map(Map.Entry::getKey)
-                                                  .collect(Collectors.joining(", shared place with: "));
+        return mapper.apply(movieList).orElseThrow()
+                                      .entrySet()
+                                      .stream().filter(entry -> entry.getValue() == mapper.apply(movieList).orElseThrow()
+                                                                                                                            .values()
+                                                                                                                            .stream().mapToLong(Long::longValue)
+                                                                                                                                     .max()
+                                                                                                                                     .orElseThrow())
+                                               .map(Map.Entry::getKey)
+                                               .collect(Collectors.joining(", shared place with: "));
     }
 
 
@@ -80,10 +69,11 @@ public class MovieDataHandler {
 
 
 
-    public boolean moviesHaveDuplicatesOfTitles(List<Movie> movieList) {
-        return movieList.stream().map(Movie::getTitle)
-                                                              .distinct()
-                                                              .count() < (long) movieList.size();
+    public boolean moviesHaveDuplicatesOfAttributes(List<Movie> movieList,
+                                                    Function<Stream<Movie>, Stream<String>> uniqueExtractor,
+                                                    Function<Stream<Movie>, Stream<String>> allExtractor) {
+
+        return uniqueExtractor.apply(movieList.stream()).count() < allExtractor.apply(movieList.stream()).count();
 
     }
 
