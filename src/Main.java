@@ -32,13 +32,21 @@ public class Main {
             MovieDataHandler movieDataHandler = new MovieDataHandler();
 
             System.out.println(movieDataHandler.findNumberOfMoviesByYear(movieList,1975));
+
             System.out.println(movieDataHandler.findRuntimeOfLongestMovie(movieList));
+
             System.out.println(movieDataHandler.findNumberOfUniqueAttributesByYear(movieList,1975, Extractor.UNIQUE_GENRES.extractFunc));
+
             System.out.println(movieDataHandler.findAttributesByHighestRatedMovie(movieList, Extractor.UNIQUE_ACTORS.extractFunc));
+
             System.out.println(movieDataHandler.findMovieTitleWithLeastNumberOfActors(movieList));
+
             System.out.println(movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.mapFunc));
+
             System.out.println(movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.mapFunc));
+
             System.out.println(movieDataHandler.findNumberOfUniqueAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.extractFunc));
+
             System.out.println(movieDataHandler.moviesHaveDuplicatesOfTitles(movieList));
 
 

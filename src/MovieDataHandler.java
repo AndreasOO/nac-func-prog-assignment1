@@ -26,7 +26,8 @@ public class MovieDataHandler {
     }
 
     public long findNumberOfUniqueAttributesByYear(List<Movie> movieList, int year, Function<Stream<Movie>, Stream<String>> extractor) {
-        return extractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year)).count();
+        return extractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year))
+                        .count();
     }
 
 
@@ -35,9 +36,8 @@ public class MovieDataHandler {
                                                  .max()
                                                  .orElse(0.0);
 
-        return extractor.apply(movieList.stream()
-                                                  .filter(movie -> movie.getImdbRating() == highestRating))
-                                  .toList();
+        return extractor.apply(movieList.stream().filter(movie -> movie.getImdbRating() == highestRating))
+                        .toList();
     }
 
 
