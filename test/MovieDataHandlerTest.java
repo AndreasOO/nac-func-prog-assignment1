@@ -79,8 +79,6 @@ class MovieDataHandlerTest {
     @Test
     void findMovieWithLeastNumberOfActors() {
         assertEquals("Movie Title With Least Actors", dataHandler.findAttributeByNumberOfActors(movieListPositiveTestFlow, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func));
-        //TODO FIGURE OUT EMPTY LIST ISSUE
-        //replace with NoSuchElementException that comes with Optional.elseThrow()?
         assertEquals("", dataHandler.findAttributeByNumberOfActors(emptyMovieList, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func));
         assertEquals("Movie 1 Title With Least Actors, shared place with: Movie 2 Title With Least Actors, shared place with: Movie 3 Title With Least Actors", dataHandler.findAttributeByNumberOfActors(movieListEdgeCaseTestFlow, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func));
     }
