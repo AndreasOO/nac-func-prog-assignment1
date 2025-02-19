@@ -62,9 +62,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfUniqueGenresByYear() {
-        assertEquals(2, dataHandler.findNumberOfUniqueAttributesByYear(movieListPositiveTestFlow,1975, Extractor.UNIQUE_GENRES.func));
-        assertEquals(0, dataHandler.findNumberOfUniqueAttributesByYear(emptyMovieList, 1975, Extractor.UNIQUE_GENRES.func));
-        assertEquals(3, dataHandler.findNumberOfUniqueAttributesByYear(movieListEdgeCaseTestFlow, 1975, Extractor.UNIQUE_GENRES.func));
+        assertEquals(2, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow,1975, Extractor.UNIQUE_GENRES.func));
+        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, Extractor.UNIQUE_GENRES.func));
+        assertEquals(3, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, Extractor.UNIQUE_GENRES.func));
 
     }
 
@@ -98,9 +98,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfUniqueLanguagesInMovies() {
-        assertEquals(2, dataHandler.findNumberOfUniqueAttributesInMovies(movieListPositiveTestFlow, Extractor.UNIQUE_LANGUAGES.func));
-        assertEquals(0, dataHandler.findNumberOfUniqueAttributesInMovies(emptyMovieList, Extractor.UNIQUE_LANGUAGES.func));
-        assertEquals(3, dataHandler.findNumberOfUniqueAttributesInMovies(movieListEdgeCaseTestFlow, Extractor.UNIQUE_LANGUAGES.func));
+        assertEquals(2, dataHandler.findNumberOfAttributesInMovies(movieListPositiveTestFlow, Extractor.UNIQUE_LANGUAGES.func));
+        assertEquals(0, dataHandler.findNumberOfAttributesInMovies(emptyMovieList, Extractor.UNIQUE_LANGUAGES.func));
+        assertEquals(3, dataHandler.findNumberOfAttributesInMovies(movieListEdgeCaseTestFlow, Extractor.UNIQUE_LANGUAGES.func));
     }
 
     @Test

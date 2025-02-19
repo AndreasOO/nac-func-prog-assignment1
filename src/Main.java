@@ -33,7 +33,7 @@ public class Main {
             int resultQ2 = movieDataHandler.findRuntimeStatistics(movieList, IntReducer.MAX_RUNTIME.func);
             System.out.println(resultQ2);
 
-            long resultQ3 = movieDataHandler.findNumberOfUniqueAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.func);
+            long resultQ3 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.func);
             System.out.println(resultQ3);
 
             List<String> resultQ4 = movieDataHandler.findAttributesByRating(movieList, Extractor.UNIQUE_ACTORS.func, DoubleReducer.MAX_RATING.func);
@@ -48,7 +48,7 @@ public class Main {
             String resultQ7 = movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
             System.out.println(resultQ7);
 
-            long resultQ8 = movieDataHandler.findNumberOfUniqueAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.func);
+            long resultQ8 = movieDataHandler.findNumberOfAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.func);
             System.out.println(resultQ8);
 
             boolean resultQ9 = movieDataHandler.moviesHaveDuplicatesOfAttributes(movieList, Extractor.UNIQUE_TITLES.func, Extractor.ALL_TITLES.func);

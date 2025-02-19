@@ -17,19 +17,24 @@ public class MovieDataHandler {
                                                               .count();
     }
 
-    public int findRuntimeStatistics(List<Movie> movieList, Function<List<Movie>, Integer> reducer) {
+    public int findRuntimeStatistics(List<Movie> movieList,
+                                     Function<List<Movie>, Integer> reducer) {
+
         return reducer.apply(movieList);
     }
 
-    public long findNumberOfUniqueAttributesByYear(List<Movie> movieList,
-                                                   int year,
-                                                   Function<Stream<Movie>, Stream<String>> extractor) {
+
+
+    public long findNumberOAttributesByYear(List<Movie> movieList,
+                                            int year,
+                                            Function<Stream<Movie>, Stream<String>> extractor) {
 
         return extractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year))
                         .count();
     }
 
 
+    //TODO add Target lambda variable
     public List<String> findAttributesByRating(List<Movie> movieList,
                                                Function<Stream<Movie>, Stream<String>> extractor,
                                                Function<List<Movie>, Double> reducer) {
@@ -38,7 +43,7 @@ public class MovieDataHandler {
                         .toList();
     }
 
-
+    //TODO add Target lambda variable and rewrite to return List<String>, then combine with method above to build HOF
     public String findAttributeByNumberOfActors(List<Movie> movieList,
                                                 Function<Stream<Movie>, Stream<String>> extractor,
                                                 Function<List<Movie>, Integer> reducer) {
@@ -74,7 +79,9 @@ public class MovieDataHandler {
     }
 
 
-    public long findNumberOfUniqueAttributesInMovies(List<Movie> movieList, Function<Stream<Movie>, Stream<String>> extractor) {
+    public long findNumberOfAttributesInMovies(List<Movie> movieList,
+                                               Function<Stream<Movie>, Stream<String>> extractor) {
+
         return extractor.apply(movieList.stream()).count();
     }
 
