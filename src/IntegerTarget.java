@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.function.Function;
 
-public enum IntReducer {
+public enum IntegerTarget {
     MAX_CAST_SIZE(list -> list.stream().mapToInt(movie2 -> movie2.getCast().size())
             .min()
             .orElseThrow()),
@@ -12,7 +12,7 @@ public enum IntReducer {
 
     final Function<List<Movie>, Integer> func;
 
-    IntReducer(Function<List<Movie>, Integer> func) {
+    IntegerTarget(Function<List<Movie>, Integer> func) {
         this.func = func;
     }
 }

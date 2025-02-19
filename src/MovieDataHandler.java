@@ -17,9 +17,9 @@ public class MovieDataHandler {
     }
 
     public int findRuntimeStatistics(List<Movie> movieList,
-                                     Function<List<Movie>, Integer> reducer) {
+                                     Function<List<Movie>, Integer> target) {
 
-        return reducer.apply(movieList);
+        return target.apply(movieList);
     }
 
 
@@ -36,19 +36,20 @@ public class MovieDataHandler {
 
     public List<String> findAttributesByDoubleComparison(List<Movie> movieList,
                                                          Function<Stream<Movie>, Stream<String>> extractor,
-                                                         Function<Movie, Double> doubleTarget,
-                                                         Function<List<Movie>, Double> reducer) {
+                                                         Function<Movie, Double> comparable,
+                                                         Function<List<Movie>, Double> target) {
 
-        return extractor.apply(movieList.stream().filter(movie -> (double) doubleTarget.apply(movie) == reducer.apply(movieList)))
+        return extractor.apply(movieList.stream().filter(movie -> (double) comparable.apply(movie) == target.apply(movieList)))
                         .toList();
     }
 
 
-    public List<String> findAttributeByNumberOfActors(List<Movie> movieList,
-                                                Function<Stream<Movie>, Stream<String>> extractor,
-                                                Function<List<Movie>, Integer> reducer) {
+    public List<String> findAttributeByIntegerComparison(List<Movie> movieList,
+                                                         Function<Stream<Movie>, Stream<String>> extractor,
+                                                         Function<Movie, Integer> comparable,
+                                                         Function<List<Movie>, Integer> target) {
 
-        return extractor.apply(movieList.stream().filter((movie) -> movie.getCast().size() == reducer.apply(movieList)))
+        return extractor.apply(movieList.stream().filter((movie) -> (int) comparable.apply(movie) == target.apply(movieList)))
                         .toList();
     }
 

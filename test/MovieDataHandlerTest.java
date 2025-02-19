@@ -54,9 +54,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findRuntimeOfLongestMovie() {
-        assertEquals(220, dataHandler.findRuntimeStatistics(movieListPositiveTestFlow, IntReducer.MAX_RUNTIME.func));
-        assertEquals(0, dataHandler.findRuntimeStatistics(emptyMovieList, IntReducer.MAX_RUNTIME.func));
-        assertEquals(220, dataHandler.findRuntimeStatistics(movieListEdgeCaseTestFlow, IntReducer.MAX_RUNTIME.func));
+        assertEquals(220, dataHandler.findRuntimeStatistics(movieListPositiveTestFlow, IntegerTarget.MAX_RUNTIME.func));
+        assertEquals(0, dataHandler.findRuntimeStatistics(emptyMovieList, IntegerTarget.MAX_RUNTIME.func));
+        assertEquals(220, dataHandler.findRuntimeStatistics(movieListEdgeCaseTestFlow, IntegerTarget.MAX_RUNTIME.func));
 
     }
 
@@ -70,17 +70,17 @@ class MovieDataHandlerTest {
 
     @Test
     void findActorsByHighestRatedMovie() {
-        assertEquals(List.of("Single Actor in most movies", "What"), dataHandler.findAttributesByDoubleComparison(movieListPositiveTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func));
-        assertEquals(List.of(), dataHandler.findAttributesByDoubleComparison(emptyMovieList, Extractor.UNIQUE_ACTORS.func,DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func));
-        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), dataHandler.findAttributesByDoubleComparison(movieListEdgeCaseTestFlow, Extractor.UNIQUE_ACTORS.func,DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func));
+        assertEquals(List.of("Single Actor in most movies", "What"), dataHandler.findAttributesByDoubleComparison(movieListPositiveTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
+        assertEquals(List.of(), dataHandler.findAttributesByDoubleComparison(emptyMovieList, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
+        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), dataHandler.findAttributesByDoubleComparison(movieListEdgeCaseTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
 
     }
 
     @Test
     void findMovieWithLeastNumberOfActors() {
-        assertEquals(List.of("Movie Title With Least Actors"), dataHandler.findAttributeByNumberOfActors(movieListPositiveTestFlow, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func));
-        assertEquals(List.of(), dataHandler.findAttributeByNumberOfActors(emptyMovieList, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func));
-        assertEquals(List.of("Movie 1 Title With Least Actors","Movie 2 Title With Least Actors", "Movie 3 Title With Least Actors"), dataHandler.findAttributeByNumberOfActors(movieListEdgeCaseTestFlow, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func));
+        assertEquals(List.of("Movie Title With Least Actors"), dataHandler.findAttributeByIntegerComparison(movieListPositiveTestFlow, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
+        assertEquals(List.of(), dataHandler.findAttributeByIntegerComparison(emptyMovieList, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
+        assertEquals(List.of("Movie 1 Title With Least Actors","Movie 2 Title With Least Actors", "Movie 3 Title With Least Actors"), dataHandler.findAttributeByIntegerComparison(movieListEdgeCaseTestFlow, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
     }
 
     @Test

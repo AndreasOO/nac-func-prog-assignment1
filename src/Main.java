@@ -30,16 +30,16 @@ public class Main {
             long resultQ1 = movieDataHandler.findNumberOfMoviesByYear(movieList, 1975);
             System.out.println(resultQ1);
 
-            int resultQ2 = movieDataHandler.findRuntimeStatistics(movieList, IntReducer.MAX_RUNTIME.func);
+            int resultQ2 = movieDataHandler.findRuntimeStatistics(movieList, IntegerTarget.MAX_RUNTIME.func);
             System.out.println(resultQ2);
 
             long resultQ3 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.func);
             System.out.println(resultQ3);
 
-            List<String> resultQ4 = movieDataHandler.findAttributesByDoubleComparison(movieList, Extractor.UNIQUE_ACTORS.func, DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func);
+            List<String> resultQ4 = movieDataHandler.findAttributesByDoubleComparison(movieList, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func);
             System.out.println(resultQ4);
 
-            List<String> resultQ5 = movieDataHandler.findAttributeByNumberOfActors(movieList, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func);
+            List<String> resultQ5 = movieDataHandler.findAttributeByIntegerComparison(movieList, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func);
             System.out.println(resultQ5);
 
             long resultQ6 = movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
