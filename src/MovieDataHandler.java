@@ -1,9 +1,7 @@
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiPredicate;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MovieDataHandler {
@@ -35,16 +33,17 @@ public class MovieDataHandler {
     }
 
 
-    //TODO add Target lambda variable
-    public List<String> findAttributesByRating(List<Movie> movieList,
-                                               Function<Stream<Movie>, Stream<String>> extractor,
-                                               Function<List<Movie>, Double> reducer) {
 
-        return extractor.apply(movieList.stream().filter(movie -> movie.getImdbRating() == reducer.apply(movieList)))
+    public List<String> findAttributesByDoubleComparison(List<Movie> movieList,
+                                                         Function<Stream<Movie>, Stream<String>> extractor,
+                                                         Function<Movie, Double> doubleTarget,
+                                                         Function<List<Movie>, Double> reducer) {
+
+        return extractor.apply(movieList.stream().filter(movie -> (double) doubleTarget.apply(movie) == reducer.apply(movieList)))
                         .toList();
     }
 
-    //TODO add Target lambda variable and rewrite to return List<String>, then combine with method above to build HOF
+
     public List<String> findAttributeByNumberOfActors(List<Movie> movieList,
                                                 Function<Stream<Movie>, Stream<String>> extractor,
                                                 Function<List<Movie>, Integer> reducer) {

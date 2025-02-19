@@ -36,7 +36,7 @@ public class Main {
             long resultQ3 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.func);
             System.out.println(resultQ3);
 
-            List<String> resultQ4 = movieDataHandler.findAttributesByRating(movieList, Extractor.UNIQUE_ACTORS.func, DoubleReducer.MAX_RATING.func);
+            List<String> resultQ4 = movieDataHandler.findAttributesByDoubleComparison(movieList, Extractor.UNIQUE_ACTORS.func, DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func);
             System.out.println(resultQ4);
 
             List<String> resultQ5 = movieDataHandler.findAttributeByNumberOfActors(movieList, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func);

@@ -70,9 +70,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findActorsByHighestRatedMovie() {
-        assertEquals(List.of("Single Actor in most movies", "What"), dataHandler.findAttributesByRating(movieListPositiveTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleReducer.MAX_RATING.func));
-        assertEquals(List.of(), dataHandler.findAttributesByRating(emptyMovieList, Extractor.UNIQUE_ACTORS.func, DoubleReducer.MAX_RATING.func));
-        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), dataHandler.findAttributesByRating(movieListEdgeCaseTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleReducer.MAX_RATING.func));
+        assertEquals(List.of("Single Actor in most movies", "What"), dataHandler.findAttributesByDoubleComparison(movieListPositiveTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func));
+        assertEquals(List.of(), dataHandler.findAttributesByDoubleComparison(emptyMovieList, Extractor.UNIQUE_ACTORS.func,DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func));
+        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), dataHandler.findAttributesByDoubleComparison(movieListEdgeCaseTestFlow, Extractor.UNIQUE_ACTORS.func,DoubleTarget.RATING.func, DoubleReducer.MAX_RATING.func));
 
     }
 
