@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -44,12 +45,12 @@ public class MovieDataHandler {
     }
 
     //TODO add Target lambda variable and rewrite to return List<String>, then combine with method above to build HOF
-    public String findAttributeByNumberOfActors(List<Movie> movieList,
+    public List<String> findAttributeByNumberOfActors(List<Movie> movieList,
                                                 Function<Stream<Movie>, Stream<String>> extractor,
                                                 Function<List<Movie>, Integer> reducer) {
 
-        return extractor.apply(movieList.stream().filter(movie -> movie.getCast().size() == reducer.apply(movieList)))
-                        .collect(Collectors.joining(", shared place with: "));
+        return extractor.apply(movieList.stream().filter((movie) -> movie.getCast().size() == reducer.apply(movieList)))
+                        .toList();
     }
 
     public long findNumberOfAttributesPresentInMultipleMovies(List<Movie> movieList,
@@ -62,7 +63,7 @@ public class MovieDataHandler {
     }
 
 
-    public String findAttributeFoundInMostMovies(List<Movie> movieList,
+    public List<String> findAttributeFoundInMostMovies(List<Movie> movieList,
                                                  Function<List<Movie>, Optional<Map<String,Long>>> mapper) {
 
         long max = mapper.apply(movieList).orElseThrow()
@@ -75,7 +76,7 @@ public class MovieDataHandler {
                                       .entrySet()
                                       .stream().filter(entry -> entry.getValue() == max)
                                                .map(Map.Entry::getKey)
-                                               .collect(Collectors.joining(", shared place with: "));
+                                               .toList();
     }
 
 

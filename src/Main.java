@@ -39,13 +39,13 @@ public class Main {
             List<String> resultQ4 = movieDataHandler.findAttributesByRating(movieList, Extractor.UNIQUE_ACTORS.func, DoubleReducer.MAX_RATING.func);
             System.out.println(resultQ4);
 
-            String resultQ5 = movieDataHandler.findAttributeByNumberOfActors(movieList, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func);
+            List<String> resultQ5 = movieDataHandler.findAttributeByNumberOfActors(movieList, Extractor.UNIQUE_TITLES.func, IntReducer.MAX_CAST_SIZE.func);
             System.out.println(resultQ5);
 
             long resultQ6 = movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
             System.out.println(resultQ6);
 
-            String resultQ7 = movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
+            List<String> resultQ7 = movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
             System.out.println(resultQ7);
 
             long resultQ8 = movieDataHandler.findNumberOfAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.func);
