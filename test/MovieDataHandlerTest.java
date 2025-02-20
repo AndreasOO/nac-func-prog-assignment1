@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MovieDataHandlerTest {
 
 
+    MovieDataHandler dataHandler = new MovieDataHandler();
 
     List<Movie> movieListPositiveTestFlow = List.of(
             new Movie("573a139ef29313caabcfc151", "Duplicate Movie Title", 1975, List.of("Romance", "Comedy"), "John Joe", List.of("Marc Dwayne", "Trick Name"), 8.5, List.of("English", "Swedish"), 120),
@@ -22,7 +23,7 @@ class MovieDataHandlerTest {
             new Movie("573a139ef29313caabcfc166", "Movie Title 4", 1975, List.of("Romance", "Comedy"), "John Joe", List.of("Single Actor in most movies", "Milky Way"), 3.8, List.of("English", "Swedish"), 120)
     );
 
-    MovieDataHandler dataHandler = new MovieDataHandler();
+    List<Movie> emptyMovieList = new ArrayList<>();
 
     List<Movie> movieListEdgeCaseTestFlow = List.of(
             new Movie("573a139ef29313caabcfc167", "Test 2 non Duplicate Movie Title", 1975, List.of("Romance", "Comedy"), "John Joe", List.of("Actor 2 in most movies", "Trick Name"), 8.5, List.of("English", "Swedish"), 120),
@@ -41,7 +42,6 @@ class MovieDataHandlerTest {
            );
 
 
-    List<Movie> emptyMovieList = new ArrayList<>();
 
 
     @Test
@@ -87,6 +87,7 @@ class MovieDataHandlerTest {
     void findNumberOfActorsStarringInMultipleMovies() {
         assertEquals(2, dataHandler.findNumberOfAttributes(movieListPositiveTestFlow, AttributeExtractor.DUPLICATE_ACTORS.func));
         assertEquals(0, dataHandler.findNumberOfAttributes(emptyMovieList, AttributeExtractor.DUPLICATE_ACTORS.func));
+        assertEquals(4, dataHandler.findNumberOfAttributes(movieListEdgeCaseTestFlow, AttributeExtractor.DUPLICATE_ACTORS.func));
     }
 
     @Test
