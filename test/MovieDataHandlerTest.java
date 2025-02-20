@@ -86,8 +86,8 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfActorsStarringInMultipleMovies() {
-        assertEquals(2, dataHandler.findNumberOfAttributesPresentInMultipleMovies(movieListPositiveTestFlow, Mapper.ACTOR_APPEARANCE.func));
-        assertEquals(0, dataHandler.findNumberOfAttributesPresentInMultipleMovies(emptyMovieList, Mapper.ACTOR_APPEARANCE.func));
+        assertEquals(2, dataHandler.findNumberOfAttributes(movieListPositiveTestFlow, AttributeExtractor.DUPLICATE_ACTORS.func));
+        assertEquals(0, dataHandler.findNumberOfAttributes(emptyMovieList, AttributeExtractor.DUPLICATE_ACTORS.func));
     }
 
     @Test

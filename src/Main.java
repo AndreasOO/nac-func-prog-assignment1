@@ -43,8 +43,9 @@ public class Main {
             List<String> resultQ5 = movieDataHandler.findAttributeByIntegerComparison(movieList, AttributeExtractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func);
             System.out.println(resultQ5);
 
-            long resultQ6 = movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
+            long resultQ6 = movieDataHandler.findNumberOfAttributes(movieList, AttributeExtractor.DUPLICATE_ACTORS.func);
             System.out.println(resultQ6);
+
 
             List<String> resultQ7 = movieDataHandler.findMappedAttributeByLongComparison(movieList, LongTarget.MAX_ACTOR_APPEARANCE.func, Mapper.ACTOR_APPEARANCE.func);
             System.out.println(resultQ7);
