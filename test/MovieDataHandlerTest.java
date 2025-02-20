@@ -106,8 +106,8 @@ class MovieDataHandlerTest {
 
     @Test
     void moviesHaveDuplicatesOfTitles() {
-        assertTrue(dataHandler.moviesHaveDuplicatesOfAttributes(movieListPositiveTestFlow, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func));
-        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(emptyMovieList, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func));
-        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(movieListEdgeCaseTestFlow, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func));
+        assertTrue(dataHandler.moviesHaveDuplicatesOfAttributes(movieListPositiveTestFlow, AttributeExtractor.ALL_TITLES.func));
+        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(emptyMovieList, AttributeExtractor.ALL_TITLES.func));
+        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(movieListEdgeCaseTestFlow, AttributeExtractor.ALL_TITLES.func));
     }
 }

@@ -53,7 +53,7 @@ public class Main {
             long resultQ8 = movieDataHandler.findNumberOfAttributes(movieList, AttributeExtractor.UNIQUE_LANGUAGES.func);
             System.out.println(resultQ8);
 
-            boolean resultQ9 = movieDataHandler.moviesHaveDuplicatesOfAttributes(movieList, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func);
+            boolean resultQ9 = movieDataHandler.moviesHaveDuplicatesOfAttributes(movieList, AttributeExtractor.ALL_TITLES.func);
             System.out.println(resultQ9);
 
 

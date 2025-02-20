@@ -74,10 +74,8 @@ public class MovieDataHandler {
 
 
     public boolean moviesHaveDuplicatesOfAttributes(List<Movie> movieList,
-                                                    Function<Stream<Movie>, Stream<String>> uniqueAttributeExtractor,
                                                     Function<Stream<Movie>, Stream<String>> allAttributeExtractor) {
-
-        return uniqueAttributeExtractor.apply(movieList.stream()).count() < allAttributeExtractor.apply(movieList.stream()).count();
+        return allAttributeExtractor.apply(movieList.stream()).distinct().count() < allAttributeExtractor.apply(movieList.stream()).count();
 
     }
 
