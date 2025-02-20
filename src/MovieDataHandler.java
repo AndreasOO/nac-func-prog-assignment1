@@ -11,11 +11,6 @@ public class MovieDataHandler {
 
     }
 
-    public long findNumberOfMoviesByYear(List<Movie> movieList, int year) {
-        return movieList.stream().filter(movie1-> movie1.getYear() == year)
-                                                              .count();
-    }
-
     public int findRuntimeStatistics(List<Movie> movieList,
                                      Function<List<Movie>, Integer> target) {
 

@@ -27,8 +27,9 @@ public class Main {
 
             MovieDataHandler movieDataHandler = new MovieDataHandler();
 
-            long resultQ1 = movieDataHandler.findNumberOfMoviesByYear(movieList, 1975);
+            long resultQ1 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, Extractor.UNIQUE_MOVIE_IDS.func);
             System.out.println(resultQ1);
+
 
             int resultQ2 = movieDataHandler.findRuntimeStatistics(movieList, IntegerTarget.MAX_RUNTIME.func);
             System.out.println(resultQ2);

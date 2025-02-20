@@ -46,9 +46,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfMoviesByYear() {
-        assertEquals(8, dataHandler.findNumberOfMoviesByYear(movieListPositiveTestFlow, 1975));
-        assertEquals(0, dataHandler.findNumberOfMoviesByYear(emptyMovieList, 1975));
-        assertEquals(13, dataHandler.findNumberOfMoviesByYear(movieListEdgeCaseTestFlow, 1975));
+        assertEquals(8, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow, 1975, Extractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, Extractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(13, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, Extractor.UNIQUE_MOVIE_IDS.func));
 
     }
 

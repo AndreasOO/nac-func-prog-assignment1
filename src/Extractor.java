@@ -17,7 +17,11 @@ public enum Extractor {
 
     UNIQUE_TITLES(stream -> stream.map(Movie::getTitle).distinct()),
 
-    ALL_TITLES(stream -> stream.map(Movie::getTitle));
+    ALL_TITLES(stream -> stream.map(Movie::getTitle)),
+
+    UNIQUE_MOVIE_IDS(stream -> stream.map(Movie::getId).distinct()),;
+
+
 
     final Function<Stream<Movie>, Stream<String>> func;
 
