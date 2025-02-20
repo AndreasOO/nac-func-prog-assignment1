@@ -35,7 +35,7 @@ public class Main {
 
             ///  Hitta längden på den film som var längst (högst runtime). Returnera ett tal.
             int resultQ2 = movieDataHandler.findRuntimeStatistics(movieList,
-                                                                  IntegerTarget.MAX_RUNTIME.func);
+                                                                  NumberTarget.MAX_RUNTIME.func);
             System.out.println(resultQ2);
             ///  Hur många UNIKA genrer hade filmerna från 1975. Returnera ett tal.
             long resultQ3 = movieDataHandler.findNumberOfAttributesByYear(movieList,
@@ -43,18 +43,18 @@ public class Main {
                                                                          AttributeExtractor.UNIQUE_GENRES.func);
             System.out.println(resultQ3);
             ///  Vilka skådisar som spelade i den film som hade högst imdb-rating. Returnera en List<String> med deras namn.
-            List<String> resultQ4 = movieDataHandler.findAttributesByDoubleComparison(movieList,
+            List<String> resultQ4 = movieDataHandler.findAttributesByNumberComparison(movieList,
                                                                                       AttributeExtractor.UNIQUE_ACTORS.func,
-                                                                                      DoubleComparable.RATING.func,
-                                                                                      DoubleTarget.MAX_RATING.func);
+                                                                                      NumberComparable.RATING.func,
+                                                                                      NumberTarget.MAX_RATING.func);
             System.out.println(resultQ4);
 
             ///  Vad är titeln på den film som hade minst antal skådisar listade? Returnera en String.
             ///  OBS RETURNERAR LISTA DÅ DET KAN FINNAS FLERA TITLAR SOM HAR SAMMA HÖGSTA ANTAL SKÅDISAR
-            List<String> resultQ5 = movieDataHandler.findAttributeByIntegerComparison(movieList,
+            List<String> resultQ5 = movieDataHandler.findAttributesByNumberComparison(movieList,
                                                                                       AttributeExtractor.UNIQUE_TITLES.func,
-                                                                                      IntegerComparable.CAST_SIZE.func,
-                                                                                      IntegerTarget.MAX_CAST_SIZE.func);
+                                                                                      NumberComparable.CAST_SIZE.func,
+                                                                                      NumberTarget.MAX_CAST_SIZE.func);
             System.out.println(resultQ5);
 
             ///  Hur många skådisar var med i mer än 1 film? Returnera ett tal.
@@ -64,8 +64,8 @@ public class Main {
 
             ///  Vad hette den skådis som var med i flest filmer? Returnera en String
             ///  OBS RETURNERAR LISTA DÅ DET KAN FINNAS FLERA SKÅDISAR SOM HAR SAMMA HÖGSTA ANTAL MEDVERKAN I FILMER
-            List<String> resultQ7 = movieDataHandler.findMappedAttributeByLongComparison(movieList,
-                                                                                         LongTarget.MAX_ACTOR_APPEARANCE.func,
+            List<String> resultQ7 = movieDataHandler.findMappedAttributeByNumberComparison(movieList,
+                                                                                         NumberTarget.MAX_ACTOR_APPEARANCE.func,
                                                                                          Mapper.ACTOR_APPEARANCE.func);
             System.out.println(resultQ7);
 

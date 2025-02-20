@@ -11,9 +11,9 @@ public class MovieDataHandler {
     }
 
     public int findRuntimeStatistics(List<Movie> movieList,
-                                     Function<List<Movie>, Integer> target) {
+                                     Function<List<Movie>, ? extends Number> target) {
 
-        return target.apply(movieList);
+        return target.apply(movieList).intValue();
     }
 
     public long findNumberOfAttributes(List<Movie> movieList,
@@ -33,32 +33,23 @@ public class MovieDataHandler {
 
 
 
-    public List<String> findAttributesByDoubleComparison(List<Movie> movieList,
+    public List<String> findAttributesByNumberComparison(List<Movie> movieList,
                                                          Function<Stream<Movie>, Stream<String>> attributeExtractor,
-                                                         Function<Movie, Double> comparable,
-                                                         Function<List<Movie>, Double> target) {
+                                                         Function<Movie, ? extends Number> comparable,
+                                                         Function<List<Movie>, ? extends Number> target) {
 
-        return attributeExtractor.apply(movieList.stream().filter(movie -> (double) comparable.apply(movie) == target.apply(movieList)))
-                        .toList();
-    }
-
-
-    public List<String> findAttributeByIntegerComparison(List<Movie> movieList,
-                                                         Function<Stream<Movie>, Stream<String>> attributeExtractor,
-                                                         Function<Movie, Integer> comparable,
-                                                         Function<List<Movie>, Integer> target) {
-
-        return attributeExtractor.apply(movieList.stream().filter((movie) -> (int) comparable.apply(movie) == target.apply(movieList)))
+        return attributeExtractor.apply(movieList.stream().filter(movie -> comparable.apply(movie).equals(target.apply(movieList))))
                         .toList();
     }
 
 
 
-    public List<String> findMappedAttributeByLongComparison(List<Movie> movieList,
-                                                            Function<List<Movie>, Long> target,
-                                                            Function<List<Movie>, Map<String,Long>> mapper) {
 
-        return mapper.apply(movieList).entrySet().stream().filter(entry -> entry.getValue() == (long) target.apply(movieList))
+    public List<String> findMappedAttributeByNumberComparison(List<Movie> movieList,
+                                                              Function<List<Movie>, ? extends Number> target,
+                                                              Function<List<Movie>, Map<String,Long>> mapper) {
+
+        return mapper.apply(movieList).entrySet().stream().filter(entry -> entry.getValue().equals(target.apply(movieList)))
                                                           .map(Map.Entry::getKey)
                                                           .toList();
     }
