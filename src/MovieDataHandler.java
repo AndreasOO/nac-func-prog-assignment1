@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -24,9 +23,9 @@ public class MovieDataHandler {
     }
 
 
-    public long findNumberOAttributesByYear(List<Movie> movieList,
-                                            int year,
-                                            Function<Stream<Movie>, Stream<String>> attributeExtractor) {
+    public long findNumberOfAttributesByYear(List<Movie> movieList,
+                                             int year,
+                                             Function<Stream<Movie>, Stream<String>> attributeExtractor) {
 
         return attributeExtractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year))
                         .count();
@@ -53,33 +52,23 @@ public class MovieDataHandler {
                         .toList();
     }
 
+
+
     public List<String> findMappedAttributeByLongComparison(List<Movie> movieList,
-                                                            Function<List<Movie>, Long> comparable,
+                                                            Function<List<Movie>, Long> target,
                                                             Function<List<Movie>, Map<String,Long>> mapper) {
 
-
-        long max = comparable.apply(movieList);
-
-        return mapper.apply(movieList)
-                .entrySet()
-                .stream().filter(entry -> entry.getValue() == max)
-                .map(Map.Entry::getKey)
-                .toList();
+        return mapper.apply(movieList).entrySet().stream().filter(entry -> entry.getValue() == (long) target.apply(movieList))
+                                                          .map(Map.Entry::getKey)
+                                                          .toList();
     }
-
-
-
-
 
 
 
     public boolean moviesHaveDuplicatesOfAttributes(List<Movie> movieList,
-                                                    Function<Stream<Movie>, Stream<String>> allAttributeExtractor) {
-        return allAttributeExtractor.apply(movieList.stream()).distinct().count() < allAttributeExtractor.apply(movieList.stream()).count();
+                                                    Function<Stream<Movie>, Stream<String>> attributeExtractor) {
+
+        return attributeExtractor.apply(movieList.stream()).distinct().count() < attributeExtractor.apply(movieList.stream()).count();
 
     }
-
-
-
-
 }

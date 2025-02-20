@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,9 +46,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfMoviesByYear() {
-        assertEquals(8, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
-        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
-        assertEquals(13, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(8, dataHandler.findNumberOfAttributesByYear(movieListPositiveTestFlow, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(0, dataHandler.findNumberOfAttributesByYear(emptyMovieList, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(13, dataHandler.findNumberOfAttributesByYear(movieListEdgeCaseTestFlow, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
 
     }
 
@@ -63,9 +62,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfUniqueGenresByYear() {
-        assertEquals(2, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow,1975, AttributeExtractor.UNIQUE_GENRES.func));
-        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, AttributeExtractor.UNIQUE_GENRES.func));
-        assertEquals(3, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, AttributeExtractor.UNIQUE_GENRES.func));
+        assertEquals(2, dataHandler.findNumberOfAttributesByYear(movieListPositiveTestFlow,1975, AttributeExtractor.UNIQUE_GENRES.func));
+        assertEquals(0, dataHandler.findNumberOfAttributesByYear(emptyMovieList, 1975, AttributeExtractor.UNIQUE_GENRES.func));
+        assertEquals(3, dataHandler.findNumberOfAttributesByYear(movieListEdgeCaseTestFlow, 1975, AttributeExtractor.UNIQUE_GENRES.func));
 
     }
 
