@@ -19,38 +19,38 @@ public class MovieDataHandler {
 
 
     public long findNumberOfAttributes(List<Movie> movieList,
-                                       Function<Stream<Movie>, Stream<String>> extractor) {
+                                       Function<Stream<Movie>, Stream<String>> attributeExtractor) {
 
-        return extractor.apply(movieList.stream()).count();
+        return attributeExtractor.apply(movieList.stream()).count();
     }
 
 
     public long findNumberOAttributesByYear(List<Movie> movieList,
                                             int year,
-                                            Function<Stream<Movie>, Stream<String>> extractor) {
+                                            Function<Stream<Movie>, Stream<String>> attributeExtractor) {
 
-        return extractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year))
+        return attributeExtractor.apply(movieList.stream().filter(movie1-> movie1.getYear() == year))
                         .count();
     }
 
 
 
     public List<String> findAttributesByDoubleComparison(List<Movie> movieList,
-                                                         Function<Stream<Movie>, Stream<String>> extractor,
+                                                         Function<Stream<Movie>, Stream<String>> attributeExtractor,
                                                          Function<Movie, Double> comparable,
                                                          Function<List<Movie>, Double> target) {
 
-        return extractor.apply(movieList.stream().filter(movie -> (double) comparable.apply(movie) == target.apply(movieList)))
+        return attributeExtractor.apply(movieList.stream().filter(movie -> (double) comparable.apply(movie) == target.apply(movieList)))
                         .toList();
     }
 
 
     public List<String> findAttributeByIntegerComparison(List<Movie> movieList,
-                                                         Function<Stream<Movie>, Stream<String>> extractor,
+                                                         Function<Stream<Movie>, Stream<String>> attributeExtractor,
                                                          Function<Movie, Integer> comparable,
                                                          Function<List<Movie>, Integer> target) {
 
-        return extractor.apply(movieList.stream().filter((movie) -> (int) comparable.apply(movie) == target.apply(movieList)))
+        return attributeExtractor.apply(movieList.stream().filter((movie) -> (int) comparable.apply(movie) == target.apply(movieList)))
                         .toList();
     }
 
@@ -82,10 +82,10 @@ public class MovieDataHandler {
 
 
     public boolean moviesHaveDuplicatesOfAttributes(List<Movie> movieList,
-                                                    Function<Stream<Movie>, Stream<String>> uniqueExtractor,
-                                                    Function<Stream<Movie>, Stream<String>> allExtractor) {
+                                                    Function<Stream<Movie>, Stream<String>> uniqueAttributeExtractor,
+                                                    Function<Stream<Movie>, Stream<String>> allAttributeExtractor) {
 
-        return uniqueExtractor.apply(movieList.stream()).count() < allExtractor.apply(movieList.stream()).count();
+        return uniqueAttributeExtractor.apply(movieList.stream()).count() < allAttributeExtractor.apply(movieList.stream()).count();
 
     }
 
