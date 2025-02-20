@@ -5,14 +5,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum Mapper {
-    ACTOR_APPEARANCE(list -> list.isEmpty() ? Optional.empty() : Optional.of(list.stream()
+    ACTOR_APPEARANCE(list -> list.stream()
             .map(Movie::getCast)
             .flatMap(List::stream)
-            .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()))));
+            .collect(Collectors.groupingBy(actor -> actor, Collectors.counting())));
 
-    final Function<List<Movie>, Optional<Map<String,Long>>> func;
+    final Function<List<Movie>, Map<String,Long>> func;
 
-    Mapper(Function<List<Movie>, Optional<Map<String,Long>>> func) {
+    Mapper(Function<List<Movie>, Map<String,Long>> func) {
         this.func = func;
     }
 }

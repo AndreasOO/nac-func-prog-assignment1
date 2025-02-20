@@ -27,32 +27,32 @@ public class Main {
 
             MovieDataHandler movieDataHandler = new MovieDataHandler();
 
-            long resultQ1 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, Extractor.UNIQUE_MOVIE_IDS.func);
+            long resultQ1 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func);
             System.out.println(resultQ1);
 
 
             int resultQ2 = movieDataHandler.findRuntimeStatistics(movieList, IntegerTarget.MAX_RUNTIME.func);
             System.out.println(resultQ2);
 
-            long resultQ3 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, Extractor.UNIQUE_GENRES.func);
+            long resultQ3 = movieDataHandler.findNumberOAttributesByYear(movieList, 1975, AttributeExtractor.UNIQUE_GENRES.func);
             System.out.println(resultQ3);
 
-            List<String> resultQ4 = movieDataHandler.findAttributesByDoubleComparison(movieList, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func);
+            List<String> resultQ4 = movieDataHandler.findAttributesByDoubleComparison(movieList, AttributeExtractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func);
             System.out.println(resultQ4);
 
-            List<String> resultQ5 = movieDataHandler.findAttributeByIntegerComparison(movieList, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func);
+            List<String> resultQ5 = movieDataHandler.findAttributeByIntegerComparison(movieList, AttributeExtractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func);
             System.out.println(resultQ5);
 
             long resultQ6 = movieDataHandler.findNumberOfAttributesPresentInMultipleMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
             System.out.println(resultQ6);
 
-            List<String> resultQ7 = movieDataHandler.findAttributeFoundInMostMovies(movieList, Mapper.ACTOR_APPEARANCE.func);
+            List<String> resultQ7 = movieDataHandler.findMappedAttributeByLongComparison(movieList, LongTarget.MAX_ACTOR_APPEARANCE.func, Mapper.ACTOR_APPEARANCE.func);
             System.out.println(resultQ7);
 
-            long resultQ8 = movieDataHandler.findNumberOfAttributesInMovies(movieList, Extractor.UNIQUE_LANGUAGES.func);
+            long resultQ8 = movieDataHandler.findNumberOfAttributes(movieList, AttributeExtractor.UNIQUE_LANGUAGES.func);
             System.out.println(resultQ8);
 
-            boolean resultQ9 = movieDataHandler.moviesHaveDuplicatesOfAttributes(movieList, Extractor.UNIQUE_TITLES.func, Extractor.ALL_TITLES.func);
+            boolean resultQ9 = movieDataHandler.moviesHaveDuplicatesOfAttributes(movieList, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func);
             System.out.println(resultQ9);
 
 

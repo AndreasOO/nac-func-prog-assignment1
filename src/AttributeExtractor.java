@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public enum Extractor {
+public enum AttributeExtractor {
     UNIQUE_GENRES(stream -> stream.map(Movie::getGenres)
                                                .flatMap(List::stream)
                                                .distinct()),
@@ -25,7 +25,7 @@ public enum Extractor {
 
     final Function<Stream<Movie>, Stream<String>> func;
 
-    Extractor(Function<Stream<Movie>, Stream<String>> func) {
+    AttributeExtractor(Function<Stream<Movie>, Stream<String>> func) {
         this.func = func;
     }
 }

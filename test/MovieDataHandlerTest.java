@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class MovieDataHandlerTest {
@@ -46,9 +47,9 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfMoviesByYear() {
-        assertEquals(8, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow, 1975, Extractor.UNIQUE_MOVIE_IDS.func));
-        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, Extractor.UNIQUE_MOVIE_IDS.func));
-        assertEquals(13, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, Extractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(8, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
+        assertEquals(13, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, AttributeExtractor.UNIQUE_MOVIE_IDS.func));
 
     }
 
@@ -62,51 +63,51 @@ class MovieDataHandlerTest {
 
     @Test
     void findNumberOfUniqueGenresByYear() {
-        assertEquals(2, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow,1975, Extractor.UNIQUE_GENRES.func));
-        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, Extractor.UNIQUE_GENRES.func));
-        assertEquals(3, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, Extractor.UNIQUE_GENRES.func));
+        assertEquals(2, dataHandler.findNumberOAttributesByYear(movieListPositiveTestFlow,1975, AttributeExtractor.UNIQUE_GENRES.func));
+        assertEquals(0, dataHandler.findNumberOAttributesByYear(emptyMovieList, 1975, AttributeExtractor.UNIQUE_GENRES.func));
+        assertEquals(3, dataHandler.findNumberOAttributesByYear(movieListEdgeCaseTestFlow, 1975, AttributeExtractor.UNIQUE_GENRES.func));
 
     }
 
     @Test
     void findActorsByHighestRatedMovie() {
-        assertEquals(List.of("Single Actor in most movies", "What"), dataHandler.findAttributesByDoubleComparison(movieListPositiveTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
-        assertEquals(List.of(), dataHandler.findAttributesByDoubleComparison(emptyMovieList, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
-        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), dataHandler.findAttributesByDoubleComparison(movieListEdgeCaseTestFlow, Extractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
+        assertEquals(List.of("Single Actor in most movies", "What"), dataHandler.findAttributesByDoubleComparison(movieListPositiveTestFlow, AttributeExtractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
+        assertEquals(List.of(), dataHandler.findAttributesByDoubleComparison(emptyMovieList, AttributeExtractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
+        assertEquals(List.of("Actor 2 in most movies", "What 1","Actor 1 in most movies", "What 2"), dataHandler.findAttributesByDoubleComparison(movieListEdgeCaseTestFlow, AttributeExtractor.UNIQUE_ACTORS.func, DoubleComparable.RATING.func, DoubleTarget.MAX_RATING.func));
 
     }
 
     @Test
     void findMovieWithLeastNumberOfActors() {
-        assertEquals(List.of("Movie Title With Least Actors"), dataHandler.findAttributeByIntegerComparison(movieListPositiveTestFlow, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
-        assertEquals(List.of(), dataHandler.findAttributeByIntegerComparison(emptyMovieList, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
-        assertEquals(List.of("Movie 1 Title With Least Actors","Movie 2 Title With Least Actors", "Movie 3 Title With Least Actors"), dataHandler.findAttributeByIntegerComparison(movieListEdgeCaseTestFlow, Extractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
+        assertEquals(List.of("Movie Title With Least Actors"), dataHandler.findAttributeByIntegerComparison(movieListPositiveTestFlow, AttributeExtractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
+        assertEquals(List.of(), dataHandler.findAttributeByIntegerComparison(emptyMovieList, AttributeExtractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
+        assertEquals(List.of("Movie 1 Title With Least Actors","Movie 2 Title With Least Actors", "Movie 3 Title With Least Actors"), dataHandler.findAttributeByIntegerComparison(movieListEdgeCaseTestFlow, AttributeExtractor.UNIQUE_TITLES.func, IntegerComparable.CAST_SIZE.func, IntegerTarget.MAX_CAST_SIZE.func));
     }
 
     @Test
     void findNumberOfActorsStarringInMultipleMovies() {
         assertEquals(2, dataHandler.findNumberOfAttributesPresentInMultipleMovies(movieListPositiveTestFlow, Mapper.ACTOR_APPEARANCE.func));
-        assertThrows(NoSuchElementException.class, () ->  dataHandler.findNumberOfAttributesPresentInMultipleMovies(emptyMovieList, Mapper.ACTOR_APPEARANCE.func));
+        assertEquals(0, dataHandler.findNumberOfAttributesPresentInMultipleMovies(emptyMovieList, Mapper.ACTOR_APPEARANCE.func));
     }
 
     @Test
     void findActorsFoundInMostMovies() {
-        assertEquals(List.of("Single Actor in most movies"), dataHandler.findAttributeFoundInMostMovies(movieListPositiveTestFlow, Mapper.ACTOR_APPEARANCE.func));
-        assertThrows(NoSuchElementException.class, () ->  dataHandler.findAttributeFoundInMostMovies(emptyMovieList, Mapper.ACTOR_APPEARANCE.func));
-        assertEquals(List.of("Actor 1 in most movies", "Actor 2 in most movies"), dataHandler.findAttributeFoundInMostMovies(movieListEdgeCaseTestFlow, Mapper.ACTOR_APPEARANCE.func));
+        assertEquals(List.of("Single Actor in most movies"), dataHandler.findMappedAttributeByLongComparison(movieListPositiveTestFlow, LongTarget.MAX_ACTOR_APPEARANCE.func, Mapper.ACTOR_APPEARANCE.func));
+        assertEquals(List.of(), dataHandler.findMappedAttributeByLongComparison(emptyMovieList, LongTarget.MAX_ACTOR_APPEARANCE.func, Mapper.ACTOR_APPEARANCE.func));
+        assertEquals(List.of("Actor 1 in most movies", "Actor 2 in most movies"), dataHandler.findMappedAttributeByLongComparison(movieListEdgeCaseTestFlow, LongTarget.MAX_ACTOR_APPEARANCE.func, Mapper.ACTOR_APPEARANCE.func));
     }
 
     @Test
     void findNumberOfUniqueLanguagesInMovies() {
-        assertEquals(2, dataHandler.findNumberOfAttributesInMovies(movieListPositiveTestFlow, Extractor.UNIQUE_LANGUAGES.func));
-        assertEquals(0, dataHandler.findNumberOfAttributesInMovies(emptyMovieList, Extractor.UNIQUE_LANGUAGES.func));
-        assertEquals(3, dataHandler.findNumberOfAttributesInMovies(movieListEdgeCaseTestFlow, Extractor.UNIQUE_LANGUAGES.func));
+        assertEquals(2, dataHandler.findNumberOfAttributes(movieListPositiveTestFlow, AttributeExtractor.UNIQUE_LANGUAGES.func));
+        assertEquals(0, dataHandler.findNumberOfAttributes(emptyMovieList, AttributeExtractor.UNIQUE_LANGUAGES.func));
+        assertEquals(3, dataHandler.findNumberOfAttributes(movieListEdgeCaseTestFlow, AttributeExtractor.UNIQUE_LANGUAGES.func));
     }
 
     @Test
     void moviesHaveDuplicatesOfTitles() {
-        assertTrue(dataHandler.moviesHaveDuplicatesOfAttributes(movieListPositiveTestFlow, Extractor.UNIQUE_TITLES.func, Extractor.ALL_TITLES.func));
-        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(emptyMovieList, Extractor.UNIQUE_TITLES.func, Extractor.ALL_TITLES.func));
-        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(movieListEdgeCaseTestFlow, Extractor.UNIQUE_TITLES.func, Extractor.ALL_TITLES.func));
+        assertTrue(dataHandler.moviesHaveDuplicatesOfAttributes(movieListPositiveTestFlow, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func));
+        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(emptyMovieList, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func));
+        assertFalse(dataHandler.moviesHaveDuplicatesOfAttributes(movieListEdgeCaseTestFlow, AttributeExtractor.UNIQUE_TITLES.func, AttributeExtractor.ALL_TITLES.func));
     }
 }
