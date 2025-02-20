@@ -17,13 +17,20 @@ public class MovieDataHandler {
         return target.apply(movieList);
     }
 
-
+    // TODO MERGE THESE TO ONE HF
     public long findNumberOfAttributes(List<Movie> movieList,
                                        Function<Stream<Movie>, Stream<String>> attributeExtractor) {
 
         return attributeExtractor.apply(movieList.stream()).count();
     }
 
+    // TODO MERGE THESE TO ONE HF
+    public long findNumberOfAttributesPresentInMultipleMovies(List<Movie> movieList,
+                                                              Function<List<Movie>, Map<String,Long>> mapper) {
+        return mapper.apply(movieList).values().stream()
+                .filter(count -> count > 1)
+                .count();
+    }
 
     public long findNumberOAttributesByYear(List<Movie> movieList,
                                             int year,
@@ -66,13 +73,6 @@ public class MovieDataHandler {
                 .stream().filter(entry -> entry.getValue() == max)
                 .map(Map.Entry::getKey)
                 .toList();
-    }
-
-    public long findNumberOfAttributesPresentInMultipleMovies(List<Movie> movieList,
-                                                              Function<List<Movie>, Map<String,Long>> mapper) {
-        return mapper.apply(movieList).values().stream()
-                                               .filter(count -> count > 1)
-                                               .count();
     }
 
 
